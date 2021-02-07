@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { createAuth } from '@keystone-next/auth';
 import { config, createSchema } from '@keystone-next/keystone/schema';
 import { User } from './schemas/User';
+import { Product } from './schemas/Product';
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone';
 
@@ -35,12 +36,12 @@ export default withAuth(config({
   },
   lists: createSchema({
     // Schema items go in here
-    User
+    User,
+    Product
   }),
   ui: {
     // Show the UI only for people who pass this test
-    isAccessAllowed: ({ session }) => {
-      console.log(session)
+    isAccessAllowed: ({ session }): boolean => {
       return session?.data
     },
   },

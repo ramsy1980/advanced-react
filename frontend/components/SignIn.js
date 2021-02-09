@@ -37,6 +37,7 @@ export default function SignIn() {
   async function handleSubmit(e) {
     e.preventDefault();
     await signin();
+    resetForm();
   }
 
   const error =
@@ -67,7 +68,7 @@ export default function SignIn() {
             type="password"
             name="password"
             placeholder="Password"
-            autoComplete="password"
+            autoComplete="current-password"
             value={inputs.password}
             onChange={handleChange}
           />

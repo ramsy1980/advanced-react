@@ -6,6 +6,7 @@ import formatMoney from '../lib/formatMoney';
 import calcTotalPrice from '../lib/calcTotalPrice';
 import { useCart } from '../lib/cartState';
 import CloseButton from './styles/CloseButton';
+import RemoveFromCart from './RemoveFromCart';
 
 const CartItemStyled = styled.li`
   padding: 1rem 0;
@@ -14,6 +15,7 @@ const CartItemStyled = styled.li`
   grid-template-columns: auto 1fr auto;
   img {
     margin-right: 1rem;
+    object-fit: contain;
   }
   h3,
   p {
@@ -30,6 +32,7 @@ function CartItem({ cartItem }) {
     <CartItemStyled>
       <img
         width="100"
+        height="100"
         src={product.photo.image.publicUrlTransformed}
         alt={product.photo.altText}
       />
@@ -42,6 +45,7 @@ function CartItem({ cartItem }) {
           </em>
         </p>
       </div>
+      <RemoveFromCart id={cartItem.id} />
     </CartItemStyled>
   );
 }

@@ -20,11 +20,9 @@ export default function Pagination({ page }) {
   if (loading) return <p>Loading ...</p>;
   if (error) return <DisplayError error={error} />;
 
-  const { count } = data._allProductsMeta;
+  const { count } = data?._allProductsMeta;
 
   const pageCount = Math.ceil(count / perPage);
-
-  console.log('Pagination', page, typeof page);
 
   return (
     <PaginationStyles>

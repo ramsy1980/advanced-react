@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SignOut } from './SignOut';
 import NavStyles from './styles/NavStyles';
 import { useUser } from './User';
 
@@ -15,7 +16,8 @@ export default function Nav() {
           <Link href="/sell">Sell</Link>
           <Link href="/orders">Orders</Link>
           <Link href="/account">Account</Link>
-          <Link href="/cart">Cart</Link>
+          {/* <Link href="/cart">Cart</Link> */}
+          <SignOut />
         </>
       )}
       {!user && (

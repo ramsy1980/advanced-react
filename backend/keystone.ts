@@ -8,6 +8,7 @@ import { CartItem } from './schemas/CartItem'
 import { withItemData, statelessSessions } from '@keystone-next/keystone/session';
 import { insertSeedData } from './seed-data';
 import { sendPasswordResetEmail } from './mail';
+import { extendGraphqlSchema } from './mutations'
 const databaseURL = process.env.DATABASE_URL || 'mongodb://localhost/keystone';
 
 const sessionConfig = {
@@ -57,6 +58,7 @@ export default withAuth(config({
     ProductImage,
     CartItem
   }),
+  extendGraphqlSchema,
   ui: {
     // Show the UI only for people who pass this test
     isAccessAllowed: ({ session }): boolean => {

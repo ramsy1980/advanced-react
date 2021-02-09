@@ -4,7 +4,7 @@ const CartStateContext = createContext();
 const LocalStateProvider = CartStateContext.Provider;
 
 function CartStateProvider({ children }) {
-  const [cartOpen, setOpen] = useState(true);
+  const [cartOpen, setOpen] = useState(false);
 
   const toggleCart = () => setOpen(!cartOpen);
   const closeCart = () => setOpen(false);

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
+import Link from 'next/link';
 import Form from './styles/Form';
 import useForm from '../lib/useForm';
 import { CURRENT_USER_QUERY } from './User';
@@ -74,6 +75,7 @@ export default function SignIn() {
           />
         </label>
         <button type="submit">Sign In</button>
+        <Link href="/password/forgot">Forgot your password?</Link>
       </fieldset>
     </Form>
   );

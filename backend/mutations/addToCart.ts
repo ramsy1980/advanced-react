@@ -19,8 +19,6 @@ export default async function addToCart(
   })
 
   const [existingCartItem] = allCartItems
-  console.log(productId)
-  console.log(existingCartItem)
 
   if (existingCartItem) {
     console.log(`This item are already ${existingCartItem.quantity} in the cart, increment by 1`)

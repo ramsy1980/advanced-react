@@ -5,7 +5,7 @@ import Header from './Header';
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'radnika_next';
-    src: url('/static/radnikanext-medium-webfont.woff2') format(woff2);
+    src: url('/radnikanext-medium-webfont.woff2') format(woff2);
     font-weight: normal;
     font-style: normal;
   }
@@ -36,9 +36,9 @@ const GlobalStyles = createGlobalStyle`
       text-decoration: none;
       color: var(--black);
     }
-    a:hover {
+    /* a:hover {
       text-decoration: underline
-    }
+    } */
     button {
       font-family: 'radnika_next', --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }

@@ -5,7 +5,7 @@ export const User = list({
   // access:
   ui: {
     listView: {
-      initialColumns: ['email', 'name', 'password', 'cart'],
+      initialColumns: ['email', 'name', 'password', 'roles'],
     },
   },
   fields: {
@@ -22,6 +22,10 @@ export const User = list({
       },
     }),
     orders: relationship({ ref: 'Order.user', many: true }),
-    // TODO: Add roles
+    roles: relationship({
+      ref: 'Role.assignedTo',
+      many: true,
+      // TODO: add access control
+    }),
   },
 });

@@ -1,7 +1,7 @@
 import { list } from '@keystone-next/keystone/schema';
 import { text, integer, relationship, virtual, timestamp } from '@keystone-next/fields';
-import { byTracking, atTracking } from '@keystonejs/list-plugins';
 import formatMoney from '../lib/formatMoney';
+
 export const Order = list({
   ui: {
     listView: {
@@ -21,24 +21,22 @@ export const Order = list({
     user: relationship({ ref: 'User.orders' }),
     charge: text(),
     createdAt: timestamp({
-      defaultValue: new Date().toUTCString(),
+      access: { create: false, read: true, update: false },
+      defaultValue: () => new Date().toISOString(),
       ui: {
-        itemView: {
-          fieldMode: 'read',
-        },
-        createView: {
-          fieldMode: 'hidden'
-        },
-        listView: {
-          fieldMode: 'read'
-        }
+        createView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'read' },
       },
-      access: {
-        create: false,
-        delete: false,
-        read: true,
-        update: false
-      }
-    })
+    }),
+    updatedAt: timestamp({
+      access: { create: false, read: true, update: false },
+      hooks: {
+        resolveInput: () => new Date().toISOString(),
+      },
+      ui: {
+        createView: { fieldMode: 'hidden' },
+        itemView: { fieldMode: 'read' },
+      },
+    }),
   },
 });

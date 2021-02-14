@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import gql from 'graphql-tag';
 import Head from 'next/head';
 import styled from 'styled-components';
+import AddToCart from './AddToCart';
 import DisplayError from './ErrorMessage';
 
 export const SINGLE_ITEM_QUERY = gql`
@@ -33,6 +34,14 @@ const ProductStyles = styled.div`
     width: 100%;
     object-fit: contain;
   }
+  .details {
+    display: flex;
+    flex-direction: column;
+    button {
+      height: 25px;
+      margin-top: auto;
+    }
+  }
 `;
 
 export default function SingleProduct({ id }) {
@@ -56,6 +65,7 @@ export default function SingleProduct({ id }) {
       <div className="details">
         <h1>{Product.name}</h1>
         <p>{Product.description}</p>
+        <AddToCart productId={id} />
       </div>
     </ProductStyles>
   );

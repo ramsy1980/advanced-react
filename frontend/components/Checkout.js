@@ -10,7 +10,10 @@ import gql from 'graphql-tag';
 import nProgress from 'nprogress';
 import { useState } from 'react';
 import styled from 'styled-components';
+import { useRouter } from 'next/dist/client/router';
 import SickButton from './styles/SickButton';
+import { useCart } from '../lib/cartState';
+import { CURRENT_USER_QUERY } from './User';
 
 const CheckoutFormStyles = styled.form`
   box-shadow: 0 1px 2px 2px rgba(0, 0, 0, 0.04);
@@ -45,6 +48,8 @@ const stripeLib = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
 function CheckoutForm() {
   const [error, setError] = useState();
   const [loading, setLoading] = useState(false);
+  const { closeCart } = useCart();
+  const router = useRouter();
 
   const stripe = useStripe();
   const elements = useElements();
@@ -74,10 +79,15 @@ function CheckoutForm() {
       return;
     }
     // 5. Send the token from step 3 to our backend via a custom mutation
-    const order = await checkout({ variables: { token: paymentMethod.id } });
+    const order = await checkout({
+      variables: { token: paymentMethod.id },
+      refetchQueries: [{ query: CURRENT_USER_QUERY }],
+    });
     console.log('Order added', order);
     // 6. Change the page to view the order
+    router.push(`/order/${order.data.checkout.id}`);
     // 7. Close the chart
+    closeCart();
     // 8. Turn the loader off
     setLoading(false);
     nProgress.done();
@@ -88,7 +98,9 @@ function CheckoutForm() {
       {error && <ErrorStyles>{error.message}</ErrorStyles>}
       {graphqlError && <ErrorStyles>{graphqlError.message}</ErrorStyles>}
       <CardElement />
-      <SickButton>Check out now</SickButton>
+      <SickButton disabled={loading || graphqlLoading}>
+        Check out now
+      </SickButton>
     </CheckoutFormStyles>
   );
 }

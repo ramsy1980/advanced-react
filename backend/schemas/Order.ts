@@ -1,18 +1,31 @@
 import { list } from '@keystone-next/keystone/schema';
-import { text, integer, relationship, virtual, timestamp } from '@keystone-next/fields';
+import {
+  text,
+  integer,
+  relationship,
+  virtual,
+  timestamp,
+} from '@keystone-next/fields';
 import formatMoney from '../lib/formatMoney';
+import { isSignedIn, rules } from '../access';
 
 export const Order = list({
+  access: {
+    create: isSignedIn,
+    read: rules.canOrder,
+    update: () => false,
+    delete: () => false,
+  },
   ui: {
     listView: {
-      initialColumns: ['label', 'user', 'charge', 'items'],
+      initialColumns: ['label', 'items', 'user', 'createdAt'],
     },
   },
   fields: {
     label: virtual({
-      label: "Order total",
+      label: 'Order total',
       graphQLReturnType: 'String',
-      resolver(item) {
+      resolver(item: { total: number }) {
         return `${formatMoney(item.total)}`;
       },
     }),

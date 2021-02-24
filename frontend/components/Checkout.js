@@ -93,6 +93,8 @@ function CheckoutForm() {
     nProgress.done();
   }
 
+  // TODO: add loading spinner. See https://remixicon.com/
+
   return (
     <CheckoutFormStyles onSubmit={handleSubmit}>
       {error && <ErrorStyles>{error.message}</ErrorStyles>}

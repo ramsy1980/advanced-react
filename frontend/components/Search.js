@@ -35,6 +35,7 @@ export default function Search() {
       fetchPolicy: 'no-cache',
     }
   );
+  const searchOrders = router.pathname === '/orders';
   const items = data?.searchTerms || [];
   const findItemsButChill = debounce(findItems, 350);
   resetIdCounter();
@@ -71,11 +72,13 @@ export default function Search() {
         <input
           {...getInputProps({
             type: 'search',
-            placeholder: 'Search for an Item',
+            placeholder: searchOrders
+              ? 'Search for an Order'
+              : 'Search for an Item',
             id: 'search',
             className: loading ? 'loading' : '',
           })}
-          onClick={e => e.target.select()}
+          onClick={(e) => e.target.select()}
         />
       </div>
       <DropDown {...getMenuProps()}>

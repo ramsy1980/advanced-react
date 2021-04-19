@@ -38,7 +38,7 @@
   "dependencies": {
     "@keystone-next/admin-ui": "^7.0.1",
     "@keystone-next/auth": "^10.0.1",
-    "@keystone-next/cloudinary": "^2.0.7",
+    "@keystone-next/cloudinary": "2.0.9",
     "@keystone-next/fields": "^4.0.3",
     "@keystone-next/keystone": "^9.0.1",
     "@keystone-next/types": "^10.0.0",

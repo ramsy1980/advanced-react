@@ -40,7 +40,7 @@
     "@keystone-next/auth": "^10.0.1",
     "@keystone-next/cloudinary": "^2.0.7",
     "@keystone-next/fields": "^4.0.3",
-    "@keystone-next/keystone": "^9.0.1",
+    "@keystone-next/keystone": "9.3.1",
     "@keystone-next/types": "^10.0.0",
     "@keystonejs/server-side-graphql-client": "^1.1.2",
     "@types/nodemailer": "^6.4.0",
